@@ -1,0 +1,23 @@
+body {
+    background-color: #f5f7fb;
+    color: #1f2937;
+}
+
+.navbar {
+    background-color: #1f3b5b !important;
+}
+
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #dbe2ea;
+}
+
+h1, h2, h3 {
+    color: #1f2937;
+}
+
+.btn-primary {
+    background-color: #1f3b5b;
+    border-color:  #1f3b5b;
+}

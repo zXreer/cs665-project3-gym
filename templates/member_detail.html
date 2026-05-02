@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-3">Member Details</h1>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card"><div class="card-body">
+            <h4>{{ member.first_name }} {{ member.last_name }}</h4>
+            <p class="mb-1"><strong>Email:</strong> {{ member.email }}</p>
+            <p class="mb-1"><strong>Phone:</strong> {{ member.phone }}</p>
+            <p class="mb-1"><strong>Membership Type:</strong> {{ member.membership_type }}</p>
+            <p class="mb-1"><strong>Status:</strong> {{ member.status }}</p>
+            <p class="mb-0"><strong>Join Date:</strong> {{ member.join_date }}</p>
+        </div></div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card"><div class="card-header"><strong>Payments</strong></div><div class="card-body p-0">
+            <ul class="list-group list-group-flush">
+                {% for payment in member.payments %}
+                <li class="list-group-item">{{ payment.payment_date }} - ${{ '%.2f'|format(payment.amount - payment.discount) }} ({{ payment.payment_status }})</li>
+                {% else %}
+                <li class="list-group-item">No payments found.</li>
+                {% endfor %}
+            </ul>
+        </div></div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card"><div class="card-header"><strong>Bookings</strong></div><div class="card-body p-0">
+            <ul class="list-group list-group-flush">
+                {% for booking in member.bookings %}
+                <li class="list-group-item">{{ booking.gym_class.class_name }} on {{ booking.gym_class.class_date }} ({{ booking.attendance_status }})</li>
+                {% else %}
+                <li class="list-group-item">No bookings found.</li>
+                {% endfor %}
+            </ul>
+        </div></div>
+    </div>
+</div>
+{% endblock %}

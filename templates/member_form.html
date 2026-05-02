@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-3">{{ 'Edit Member' if member else 'Add Member' }}</h1>
+<div class="card form-card"><div class="card-body">
+<form method="post">
+    <div class="row g-3">
+        <div class="col-md-6"><label class="form-label">First Name</label><input name="first_name" class="form-control" required value="{{ member.first_name if member else '' }}"></div>
+        <div class="col-md-6"><label class="form-label">Last Name</label><input name="last_name" class="form-control" required value="{{ member.last_name if member else '' }}"></div>
+        <div class="col-md-6"><label class="form-label">Email</label><input type="email" name="email" class="form-control" required value="{{ member.email if member else '' }}"></div>
+        <div class="col-md-6"><label class="form-label">Phone</label><input name="phone" class="form-control" value="{{ member.phone if member else '' }}"></div>
+        <div class="col-md-4"><label class="form-label">Join Date</label><input type="date" name="join_date" class="form-control" required value="{{ member.join_date if member else today }}"></div>
+        <div class="col-md-4"><label class="form-label">Membership Type</label><input name="membership_type" class="form-control" required value="{{ member.membership_type if member else '' }}"></div>
+        <div class="col-md-4"><label class="form-label">Status</label><input name="status" class="form-control" required value="{{ member.status if member else 'Active' }}"></div>
+        <div class="col-md-6"><label class="form-label">Record Source</label><input name="record_source" class="form-control" required value="{{ member.record_source if member else 'Web App' }}"></div>
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ url_for('members') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+</div></div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Classes</h1>
+    <a href="{{ url_for('add_class') }}" class="btn btn-primary">Add Class</a>
+</div>
+<div class="card">
+    <div class="table-responsive">
+        <table class="table table-striped mb-0">
+            <thead><tr><th>ID</th><th>Class</th><th>Trainer</th><th>Date</th><th>Time</th><th>Capacity</th><th>Actions</th></tr></thead>
+            <tbody>
+            {% for gym_class in classes %}
+            <tr>
+                <td>{{ gym_class.class_id }}</td>
+                <td>{{ gym_class.class_name }}</td>
+                <td>{{ gym_class.trainer.first_name }} {{ gym_class.trainer.last_name }}</td>
+                <td>{{ gym_class.class_date }}</td>
+                <td>{{ gym_class.start_time.strftime('%H:%M') }}</td>
+                <td>{{ gym_class.capacity }}</td>
+                <td class="action-buttons">
+                    <a href="{{ url_for('class_detail', class_id=gym_class.class_id) }}" class="btn btn-sm btn-outline-secondary">View</a>
+                    <a href="{{ url_for('edit_class', class_id=gym_class.class_id) }}" class="btn btn-sm btn-outline-primary">Edit</a>
+                    <form action="{{ url_for('delete_class', class_id=gym_class.class_id) }}" method="post" class="d-inline">
+                        <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Delete this class?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7" class="text-center py-4">No classes found.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

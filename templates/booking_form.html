@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-3">Add Booking</h1>
+<div class="card form-card"><div class="card-body">
+<form method="post">
+    <div class="row g-3">
+        <div class="col-md-6"><label class="form-label">Member</label>
+            <select name="member_id" class="form-select" required>
+                <option value="">Select a member</option>
+                {% for member in members %}
+                <option value="{{ member.member_id }}">{{ member.first_name }} {{ member.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-6"><label class="form-label">Class</label>
+            <select name="class_id" class="form-select" required>
+                <option value="">Select a class</option>
+                {% for gym_class in classes %}
+                <option value="{{ gym_class.class_id }}">{{ gym_class.class_name }} - {{ gym_class.class_date }} - {{ gym_class.start_time.strftime('%H:%M') }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-4"><label class="form-label">Booking Date</label><input type="date" name="booking_date" class="form-control" required value="{{ today }}"></div>
+        <div class="col-md-4"><label class="form-label">Attendance Status</label><input name="attendance_status" class="form-control" required value="Booked"></div>
+        <div class="col-md-4"><label class="form-label">Record Source</label><input name="record_source" class="form-control" required value="Web App"></div>
+        <div class="col-12"><label class="form-label">Notes</label><input name="notes" class="form-control"></div>
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{{ url_for('bookings') }}" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+</div></div>
+{% endblock %}

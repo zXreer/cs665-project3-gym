@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="mb-1">Dashboard</h1>
+        <p class="text-muted mb-0">Overview</p>
+    </div>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-md-4 col-lg-2"><div class="card dashboard-card"><div class="card-body"><h6>Total Members</h6><h2>{{ total_members }}</h2></div></div></div>
+    <div class="col-md-4 col-lg-2"><div class="card dashboard-card"><div class="card-body"><h6>Total Trainers</h6><h2>{{ total_trainers }}</h2></div></div></div>
+    <div class="col-md-4 col-lg-2"><div class="card dashboard-card"><div class="card-body"><h6>Total Classes</h6><h2>{{ total_classes }}</h2></div></div></div>
+    <div class="col-md-4 col-lg-2"><div class="card dashboard-card"><div class="card-body"><h6>Total Bookings</h6><h2>{{ total_bookings }}</h2></div></div></div>
+    <div class="col-md-4 col-lg-2"><div class="card dashboard-card"><div class="card-body"><h6>Total Revenue</h6><h2>${{ '%.2f'|format(total_revenue) }}</h2></div></div></div>
+    <div class="col-md-4 col-lg-2"><div class="card dashboard-card"><div class="card-body"><h6>Avg Payment</h6><h2>${{ '%.2f'|format(avg_payment) }}</h2></div></div></div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-header"><strong>Class Capacity Summary</strong></div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th>Class</th>
+                            <th>Date</th>
+                            <th>Capacity</th>
+                            <th>Bookings</th>
+                            <th>Open Spots</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in class_counts %}
+                        <tr>
+                            <td>{{ item.class_name }}</td>
+                            <td>{{ item.class_date }}</td>
+                            <td>{{ item.capacity }}</td>
+                            <td>{{ item.booking_count }}</td>
+                            <td>{{ item.capacity - item.booking_count }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="5" class="text-center py-4">No classes found.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-header"><strong>Recent Payments</strong></div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-striped mb-0">
+                        <thead>
+                        <tr>
+                            <th>Member</th>
+                            <th>Date</th>
+                            <th>Net</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for payment in recent_payments %}
+                        <tr>
+                            <td>{{ payment.member.first_name }} {{ payment.member.last_name }}</td>
+                            <td>{{ payment.payment_date }}</td>
+                            <td>${{ '%.2f'|format(payment.amount - payment.discount) }}</td>
+                        </tr>
+                        {% else %}
+                        <tr><td colspan="3" class="text-center py-4">No payments found.</td></tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

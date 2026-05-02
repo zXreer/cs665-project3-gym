@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1 class="mb-3">Class Details</h1>
+<div class="row g-4">
+    <div class="col-lg-4">
+        <div class="card"><div class="card-body">
+            <h4>{{ gym_class.class_name }}</h4>
+            <p class="mb-1"><strong>Trainer:</strong> {{ gym_class.trainer.first_name }} {{ gym_class.trainer.last_name }}</p>
+            <p class="mb-1"><strong>Level:</strong> {{ gym_class.class_level }}</p>
+            <p class="mb-1"><strong>Room:</strong> {{ gym_class.room_name }}</p>
+            <p class="mb-1"><strong>Date:</strong> {{ gym_class.class_date }}</p>
+            <p class="mb-1"><strong>Time:</strong> {{ gym_class.start_time.strftime('%H:%M') }}</p>
+            <p class="mb-0"><strong>Capacity:</strong> {{ booking_count }} / {{ gym_class.capacity }}</p>
+        </div></div>
+    </div>
+    <div class="col-lg-8">
+        <div class="card"><div class="card-header"><strong>Booked Members</strong></div><div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-striped mb-0">
+                    <thead><tr><th>Member</th><th>Booking Date</th><th>Status</th><th>Notes</th></tr></thead>
+                    <tbody>
+                    {% for booking in gym_class.bookings %}
+                    <tr>
+                        <td>{{ booking.member.first_name }} {{ booking.member.last_name }}</td>
+                        <td>{{ booking.booking_date }}</td>
+                        <td>{{ booking.attendance_status }}</td>
+                        <td>{{ booking.notes }}</td>
+                    </tr>
+                    {% else %}
+                    <tr><td colspan="4" class="text-center py-4">No bookings found.</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div></div>
+    </div>
+</div>
+{% endblock %}
