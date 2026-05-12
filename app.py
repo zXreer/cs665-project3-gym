@@ -153,7 +153,7 @@ def delete_member(member_id):
 
 @app.route('/trainers')
 def trainers():
-    all_trainers = Trainer.query.order_by(Trainer.last_name.asc(), Trainer.first_name.asc()).all()
+    all_trainers = Trainer.query.order_by(Trainer.trainer_id.asc()).all()
     return render_template('trainers.html', trainers=all_trainers)
 
 
@@ -298,7 +298,7 @@ def delete_class(class_id):
 
 @app.route('/bookings')
 def bookings():
-    all_bookings = Booking.query.order_by(Booking.booking_date.desc(), Booking.booking_id.desc()).all()
+    all_bookings = Booking.query.order_by(Booking.booking_id.asc()).all()
     return render_template('bookings.html', bookings=all_bookings)
 
 
@@ -361,7 +361,7 @@ def delete_booking(booking_id):
 
 @app.route('/payments')
 def payments():
-    all_payments = Payment.query.order_by(Payment.payment_date.desc(), Payment.payment_id.desc()).all()
+    all_payments = Payment.query.order_by(Payment.payment_id.asc()).all()
     return render_template('payments.html', payments=all_payments)
 
 
