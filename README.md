@@ -1,6 +1,6 @@
 # Gym Membership Management System
 
-This project is a continuation of **Project 2**. In Project 2, I designed the database for a gym membership management scenario using the tables **members, payments, bookings, classes, and trainers**. In Project 3, I implemented the database as a full-stack Python web application.
+This project is a continution of Project 2. In Project 2, I designed the database for a gym membership management using the tables **members, payments, bookings, classes, and trainers**. In Project 3, I implemented the database as a full-stack Python web application.
 
 ## Project Description
 This application helps gym staff manage:
@@ -11,7 +11,7 @@ This application helps gym staff manage:
 - payments
 - dashboard summaries
 
-The project uses a normalized relational database and provides a clean web interface for managing related records.
+The project uses a normalized relational database and provides a clean web UI for managing records.
 
 ## Technology Stack
 - Python 3
@@ -44,16 +44,20 @@ The project uses a normalized relational database and provides a clean web inter
 ## Installation Instructions
 1. Open the folder in VS Code.
 2. Open a terminal in the project folder.
-3. Create a virtual environment.
+3. Create a virtual environment:
+   
+   'python3 -m venv venv'
+   
 4. Activate it:
+   
+   'source venv/bin/activate'
 
-'python3 
 5. Install dependencies:
-
+   
    'pip install -r requirements.txt'
 
 6. Run the application:
-
+   
    'python3 app.py'
 
 7. Open your browser at:
@@ -83,18 +87,5 @@ If you want sample data ideas, use:
 - A member cannot be booked into the same class twice.
 - A booking is blocked if class capacity is already full.
 
-## Suggested Git Commit Plan
-1. Initial project setup
-2. Add database models and schema
-3. Add member and trainer CRUD
-4. Add class, booking, and payment features
-5. Add dashboard and documentation
 
-## Deliverables Included
-- source code
-- final SQL schema
-- README
-- normalization report
-- AI disclosure log
-- `.gitignore`
 
